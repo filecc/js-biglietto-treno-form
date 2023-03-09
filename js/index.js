@@ -99,31 +99,59 @@ document.getElementById('ticketNumber').innerText = randomTicketNumber;
 if (age > 18 && age < 65) {
   document.getElementById("cost").innerHTML = `
               <p class="p-3 m-0 text-white fw-bold">  
-              ${price}€
+              €${price}
               </p>
       `;
 } else if (age <= 18 && age > 12) {
   finalPrice = (price - price * underDiscount).toFixed(2);
   document.getElementById("cost").innerHTML = `
   <p class="p-3 m-0 text-white fw-bold">  
-  ${finalPrice}€
+  €${finalPrice}
   </p>
   `;
 } else {
   finalPrice = (price - price * overDiscount).toFixed(2);
   document.getElementById("cost").innerHTML = `
-  <p class="p-3 m-0 text-white fw-bold">  
-  ${finalPrice}€
+  <p class="p-3 m-0 text-white fw-bold"> 
+  €${finalPrice}
   </p>
   `;
 }
-
+  document.getElementById('reset').classList.toggle('d-none');
   document.querySelector('.bite.bite-right').classList.toggle('d-none');
   document.querySelector('.bite.bite-left').classList.toggle('d-none');
   document.querySelector('.line').classList.toggle('d-none');
   kmInputBox.classList.toggle("d-none");
   dataToDislay.classList.toggle("d-none");
   title.classList.toggle("opacity-0");
+});
+
+/*  RESET BUTTON */
+
+document.getElementById('reset').addEventListener('click', () => {
+  ageInput.value = '';
+  kmInput.value = '';
+  nextBtn.disabled = true;
+  nextBtn.classList.remove("shadow");
+  nextBtn.classList.remove("btn-animation");
+  calcBtn.disabled = true;
+  calcBtn.classList.remove("shadow");
+  calcBtn.classList.add("btn-light");
+  calcBtn.classList.remove("btn-success");
+  calcBtn.classList.remove("btn-animation");
+  calcBtn.classList.remove("btn-see");
+  document.querySelector('.bite.bite-right').classList.toggle('d-none');
+  document.querySelector('.bite.bite-left').classList.toggle('d-none');
+  document.querySelector('.line').classList.toggle('d-none');
+  kmInputBox.classList.add("d-none");
+  dataToDislay.classList.add("d-none");
+  title.classList.add("opacity-0");
+  ageInputBox.classList.toggle('d-none');
+  document.getElementById('ticketNumber').innerText = '';
+  dataToDislay.innerHTML = '';
+  document.getElementById("cost").innerHTML = '';
+  document.getElementById('reset').classList.toggle('d-none');
+  
 });
 
 
