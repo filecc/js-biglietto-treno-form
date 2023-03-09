@@ -24,6 +24,24 @@ const ageInputBox = document.getElementById("form-age"),
 let age = 0;
 let km = 0;
 
+// variabili operative
+const kmPrice = 0.21,
+  overDiscount = 0.4,
+  underDiscount = 0.2,
+  randomLetter = ["z", "b", "f", "d", "j", "k"];
+const randomTicketNumber =
+  randomLetter[Math.floor(Math.random() * 5)] +
+  randomLetter[Math.floor(Math.random() * 5)] +
+  Math.floor(Math.random() * 10 + 1) +
+  Math.floor(Math.random() * 10 + 1) +
+  Math.floor(Math.random() * 10 + 1) +
+  Math.floor(Math.random() * 10 + 1) +
+  randomLetter[Math.floor(Math.random() * 5)] +
+  randomLetter[Math.floor(Math.random() * 5)];
+let finalPrice = 0;
+// calcoliamo il prezzo base senza sconti
+let price = 0;
+
 /* controllo dell'input change così da abilitare un button per proseguire */
 
 ageInput.addEventListener("input", () => {
@@ -74,28 +92,40 @@ calcBtn.addEventListener("click", () => {
     </li>
 </ul>
 `;
+
+price = (km * kmPrice).toFixed(2);
+document.getElementById('ticketNumber').innerText = randomTicketNumber;
+// controlli IF ELSE
+if (age > 18 && age < 65) {
+  document.getElementById("cost").innerHTML = `
+              <p class="p-3 m-0 text-white fw-bold">  
+              ${price}€
+              </p>
+      `;
+} else if (age <= 18 && age > 12) {
+  finalPrice = (price - price * underDiscount).toFixed(2);
+  document.getElementById("cost").innerHTML = `
+  <p class="p-3 m-0 text-white fw-bold">  
+  ${finalPrice}€
+  </p>
+  `;
+} else {
+  finalPrice = (price - price * overDiscount).toFixed(2);
+  document.getElementById("cost").innerHTML = `
+  <p class="p-3 m-0 text-white fw-bold">  
+  ${finalPrice}€
+  </p>
+  `;
+}
+
+  document.querySelector('.bite.bite-right').classList.toggle('d-none');
+  document.querySelector('.bite.bite-left').classList.toggle('d-none');
+  document.querySelector('.line').classList.toggle('d-none');
   kmInputBox.classList.toggle("d-none");
   dataToDislay.classList.toggle("d-none");
   title.classList.toggle("opacity-0");
 });
 
-// variabili operative
-const kmPrice = 0.21,
-  overDiscount = 0.4,
-  underDiscount = 0.2,
-  randomLetter = ["z", "b", "f", "d", "j", "k"];
-const randomTicketNumber =
-  randomLetter[Math.floor(Math.random() * 5)] +
-  randomLetter[Math.floor(Math.random() * 5)] +
-  Math.floor(Math.random() * 10 + 1) +
-  Math.floor(Math.random() * 10 + 1) +
-  Math.floor(Math.random() * 10 + 1) +
-  Math.floor(Math.random() * 10 + 1) +
-  randomLetter[Math.floor(Math.random() * 5)] +
-  randomLetter[Math.floor(Math.random() * 5)];
-let finalPrice = 0;
-// calcoliamo il prezzo base senza sconti
-let price = (km * kmPrice).toFixed(2);
 
-// controlli IF ELSE
+
 
