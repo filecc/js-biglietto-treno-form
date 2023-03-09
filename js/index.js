@@ -1,94 +1,101 @@
 /* 
 
-Il programma dovrà chiedere all'utente il numero di chilometri che vuole percorrere e l'età del passeggero.
-Sulla base di queste informazioni dovrà calcolare il prezzo totale del viaggio, secondo queste regole:
-il prezzo del biglietto è definito in base ai km (0.21 € al km)
-va applicato uno sconto del 20% per i minorenni
-va applicato uno sconto del 40% per gli over 65.
-L'output del prezzo finale va messo fuori in forma umana (con massimo due decimali, per indicare centesimi sul prezzo). 
+Scrivere un programma che chieda all’utente:
+- Il numero di chilometri da percorrere
+- Età del passeggero
+Sulla base di queste informazioni dovrà calcolare il prezzo totale del biglietto di viaggio, secondo le seguenti regole:
+- il prezzo del biglietto è definito in base ai km (0.21 € al km)
+- va applicato uno sconto del 20% per i minorenni
+- va applicato uno sconto del 40% per gli over 65.
 
 */
 
 // variabili necessarie
 
+const ageInputBox = document.getElementById("form-age"),
+  ageInput = document.querySelector('input[name="age"]'),
+  nextBtn = document.getElementById("nextBtn"),
+  kmInputBox = document.getElementById("form-km"),
+  kmInput = document.querySelector('input[name="km"]'),
+  calcBtn = document.getElementById("calcBtn"),
+  title = document.querySelector("h1"),
+  dataToDislay = document.getElementById("data");
 
+let age = 0;
+let km = 0;
 
-// variabili dichiarate
-/* 
-const kmToDo = parseInt(("Quanti kilometri vuoi percorrere?")),
-  age = parseInt(("Quanti anni hai?")),
-  euroKm = 0.21,
+/* controllo dell'input change così da abilitare un button per proseguire */
+
+ageInput.addEventListener("input", () => {
+  if (ageInput && ageInput.value) {
+    nextBtn.disabled = false;
+    nextBtn.classList.add("shadow");
+    nextBtn.classList.add("btn-animation");
+  } else {
+    nextBtn.disabled = true;
+    nextBtn.classList.remove("btn-animation");
+  }
+});
+nextBtn.addEventListener("click", () => {
+  age = parseInt(ageInput.value);
+  console.log(age);
+  ageInputBox.classList.toggle("d-none");
+  kmInputBox.classList.toggle("d-none");
+});
+
+kmInput.addEventListener("input", () => {
+  if (kmInput && kmInput.value) {
+    calcBtn.disabled = false;
+    calcBtn.classList.add("shadow");
+    calcBtn.classList.remove("btn-light");
+    calcBtn.classList.add("btn-success");
+    calcBtn.classList.add("btn-animation");
+    calcBtn.classList.add("btn-see");
+  } else {
+    calcBtn.disabled = true;
+    calcBtn.classList.add("btn-light");
+    calcBtn.classList.remove("btn-success");
+    calcBtn.classList.remove("btn-animation");
+    calcBtn.classList.remove("btn-see");
+  }
+});
+
+calcBtn.addEventListener("click", () => {
+  km = parseInt(kmInput.value);
+  dataToDislay.innerHTML = `
+<ul class='list-unstyled d-flex justify-content-between align-items-center text-start'>
+    <li>
+    <div class='fw-bold'>AGE</div>
+    <div>${age}</div>
+    </li>
+    <li>
+    <div class='fw-bold'>KM</div>
+    <div>${km}</div>
+    </li>
+</ul>
+`;
+  kmInputBox.classList.toggle("d-none");
+  dataToDislay.classList.toggle("d-none");
+  title.classList.toggle("opacity-0");
+});
+
+// variabili operative
+const kmPrice = 0.21,
   overDiscount = 0.4,
-  under18Discont = 0.2; */
-
+  underDiscount = 0.2,
+  randomLetter = ["z", "b", "f", "d", "j", "k"];
+const randomTicketNumber =
+  randomLetter[Math.floor(Math.random() * 5)] +
+  randomLetter[Math.floor(Math.random() * 5)] +
+  Math.floor(Math.random() * 10 + 1) +
+  Math.floor(Math.random() * 10 + 1) +
+  Math.floor(Math.random() * 10 + 1) +
+  Math.floor(Math.random() * 10 + 1) +
+  randomLetter[Math.floor(Math.random() * 5)] +
+  randomLetter[Math.floor(Math.random() * 5)];
+let finalPrice = 0;
 // calcoliamo il prezzo base senza sconti
+let price = (km * kmPrice).toFixed(2);
 
-/* let price = (euroKm * kmToDo).toFixed(2); */
+// controlli IF ELSE
 
-/* Math.round(((kmToDo * euroKm) + Number.EPSILON) * 100) / 100; */
-
-// dichiariamo la variabile per il prezzo scontato
-/* let finalPrice = 0;
-
-const randomLetter = ['a', 'b', 'c', 'd', 'e', 'k'];
-
-const randomTicket = `
-${randomLetter[Math.floor((Math.random() * 5))]}${randomLetter[Math.floor((Math.random() * 5))]}${Math.floor((Math.random() * 10)+1)}${Math.floor((Math.random() * 10)+1)}${Math.floor((Math.random() * 10)+1)}${Math.floor((Math.random() * 10)+1)}${randomLetter[Math.floor((Math.random() * 5))]}${randomLetter[Math.floor((Math.random() * 5))]}
-` */
-
-// variabile per indicare se mostrare i dati o no
-/* const dataToShow = (document.getElementById("data").innerHTML = `
-            <ul class='list-unstyled d-flex justify-content-between align-items-center text-start'>
-                <li>
-                <div class='fw-bold'>AGE</div>
-                <div>${age}</div>
-                </li>
-                <li>
-                <div class='fw-bold'>KM</div>
-                <div>${kmToDo}</div>
-                </li>
-            </ul>
-`);
-
-if (
-  isNaN(age) ||
-  parseInt(age) < 12 ||
-  parseInt(age) > 130 ||
-  isNaN(kmToDo) ||
-  parseInt(kmToDo) <= 0
-) {
-  document.getElementById("cost").innerHTML = `
-            <p class="p-3 m-0 text-danger fw-bold">  
-            Oops!
-            </p>
-    `;
-  document.getElementById("data").innerHTML = `
-    <p class="text-center text-danger fw-bold">Riprova.</p>`;
-} else {
-  document.getElementById('ticketNumber').innerHTML = randomTicket;
-    if (age > 18 && age < 65) {
-        document.getElementById("cost").innerHTML = `
-                  <p class="p-3 m-0 text-white fw-bold">  
-                  ${price}€
-                  </p>
-          `;
-        document.getElementById("data").innerHTML = dataToShow;
-      } else if (age <= 18 && age > 12) {
-        finalPrice = (price - price * under18Discont).toFixed(2);
-        document.getElementById("cost").innerHTML = `
-      <p class="p-3 m-0 text-white fw-bold">  
-      ${finalPrice}€
-      </p>
-      `;
-        document.getElementById("data").innerHTML = dataToShow;
-      } else if (age >= 65 && age < 130) {
-        finalPrice = (price - price * overDiscount).toFixed(2);
-        document.getElementById("cost").innerHTML = `
-      <p class="p-3 m-0 text-white fw-bold">  
-      ${finalPrice}€
-      </p>
-      `;
-        document.getElementById("data").innerHTML = dataToShow;
-      }
-}
- */

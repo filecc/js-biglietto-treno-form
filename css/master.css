@@ -72,10 +72,19 @@ main{
     transition: all .5s linear;
 }
 
+.btn-animation{
+    animation: goOn 1.5s infinite;
+}
+
 #nextBtn:hover{
     cursor: pointer;
-    animation: goOn 1.5s infinite;
     background-color: white;
+}
+
+.btn-see{
+    width: 200px;
+    border-radius: 5px !important;
+
 }
 
 

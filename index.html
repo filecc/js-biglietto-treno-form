@@ -22,7 +22,7 @@
             <div class="col-12 text-center d-flex  flex-column justify-content-center align-items-center mt-5">
                 <div class="text-center">
                     <img class="img-fluid w-75" src="./images/logo.svg-4242507659" alt="logo">
-                    <h1 class="fs-6 pt-2">your ticket </h1>
+                    <h1 class="fs-6 pt-2 opacity-0">your ticket </h1>
                 </div>
 
                 <small id="ticketNumber"></small>
@@ -31,16 +31,17 @@
 
             <div class="col-12 mt-5 pt-4 text-center">
                 <div id="form-age">
-                    <label class="form-label" for="age"> Inserisci la tua et&agrave;</label>
-                    <input autocomplete="off" class="form-control mb-3" type="number" name="age">
-                    <button id="nextBtn" class="btn btn-light shadow rounded-circle disabled"><i class="fa-solid fa-arrow-right"></i></span>
+                    <label class="form-label fw-bold" for="age"> Inserisci la tua et&agrave;</label>
+                    <input min="14" max="130" autocomplete="off" class="form-control mb-3" type="number" name="age" required>
+                    <button id="nextBtn" class="btn btn-light rounded-circle" disabled><i class="fa-solid fa-arrow-right"></i></button>
                 </div>
-                <div class="form-km d-none">
-                    <label class="form-label" for="age"> Inserisci i km da percorrere:</label>
-                    <input class="form-control" type="number">
+                <div id="form-km" class="d-none">
+                    <label class="form-label fw-bold" for="age"> Inserisci i km da percorrere:</label>
+                    <input min="1" max="2500" class="form-control mb-3" type="number" name="km" required>
+                    <button id="calcBtn" class="btn btn-light rounded-circle" disabled><i class="fa-solid fa-check"></i></button>
                 </div>
                 <div id="data" class="d-none">
-
+                   
                 </div>
                    
                     
