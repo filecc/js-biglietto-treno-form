@@ -1,0 +1,96 @@
+body{
+    background-image: url(../images/bg-main-desktop.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+main{
+    min-height: 100vh;
+    width: 100%;
+   
+}
+
+.ticket{
+    background-color: #8dc7e8;
+    width: 310px;
+    min-width: 310px;
+}
+
+.bite-left{
+    background-color: white;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: -15px;
+    transform: translate(-50, -50);
+}
+
+.bite-right{
+    background-color: white;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    right: -15px;
+    transform: translate(-50, -50);
+}
+
+.line{
+    padding: 2px;
+    background-color: #2c2a2c;
+    background: repeating-linear-gradient(
+  to right,
+  transparent,
+  #2c2a2c,
+  transparent);
+    position: absolute;
+    top: 51.5%;
+    left: 0;
+    z-index: 0;
+}
+
+#ticketNumber{
+    font-family: 'Libre Barcode 39 Text', cursive;
+    font-size: 3rem;
+}
+
+#cost{
+    font-size: 3.5rem;
+}
+
+#nextBtn{
+    border: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    transition: all .5s linear;
+}
+
+#nextBtn:hover{
+    cursor: pointer;
+    animation: goOn 1.5s infinite;
+    background-color: white;
+}
+
+
+
+
+@keyframes goOn {
+    0% {
+        transform: scale(1);
+    }
+   
+    50%{
+        transform: scale(1.1);
+    }
+   
+    100% {
+        transform: scale(1);
+    }
+}
