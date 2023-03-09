@@ -95,14 +95,16 @@ calcBtn.addEventListener("click", () => {
 
 price = (km * kmPrice).toFixed(2);
 document.getElementById('ticketNumber').innerText = randomTicketNumber;
-// controlli IF ELSE
+// controls IF ELSE
 if (age > 18 && age < 65) {
+  // case no discount 
   document.getElementById("cost").innerHTML = `
               <p class="p-3 m-0 text-white fw-bold">  
               €${price}
               </p>
       `;
-} else if (age <= 18 && age > 12) {
+} else if (age <= 18) {
+  // case under 18
   finalPrice = (price - price * underDiscount).toFixed(2);
   document.getElementById("cost").innerHTML = `
   <p class="p-3 m-0 text-white fw-bold">  
@@ -110,6 +112,7 @@ if (age > 18 && age < 65) {
   </p>
   `;
 } else {
+  // case over 65
   finalPrice = (price - price * overDiscount).toFixed(2);
   document.getElementById("cost").innerHTML = `
   <p class="p-3 m-0 text-white fw-bold"> 
@@ -126,11 +129,14 @@ if (age > 18 && age < 65) {
   title.classList.toggle("opacity-0");
 });
 
-/*  RESET BUTTON */
+/*  RESET BUTTON and reset everything */
 
 document.getElementById('reset').addEventListener('click', () => {
+  /* reset input value */
   ageInput.value = '';
   kmInput.value = '';
+
+  /* reset the buttons style */
   nextBtn.disabled = true;
   nextBtn.classList.remove("shadow");
   nextBtn.classList.remove("btn-animation");
@@ -140,13 +146,19 @@ document.getElementById('reset').addEventListener('click', () => {
   calcBtn.classList.remove("btn-success");
   calcBtn.classList.remove("btn-animation");
   calcBtn.classList.remove("btn-see");
+
+  /* reset the ticket style on border */
   document.querySelector('.bite.bite-right').classList.toggle('d-none');
   document.querySelector('.bite.bite-left').classList.toggle('d-none');
   document.querySelector('.line').classList.toggle('d-none');
+
+  /* hide all except the first input box with the age request */
   kmInputBox.classList.add("d-none");
   dataToDislay.classList.add("d-none");
   title.classList.add("opacity-0");
   ageInputBox.classList.toggle('d-none');
+
+  /* reset all the text box */
   document.getElementById('ticketNumber').innerText = '';
   dataToDislay.innerHTML = '';
   document.getElementById("cost").innerHTML = '';
