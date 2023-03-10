@@ -45,14 +45,20 @@ let price = 0;
 /* controllo dell'input change così da abilitare un button per proseguire */
 
 ageInput.addEventListener("input", () => {
-  if (ageInput && ageInput.value) {
-    nextBtn.disabled = false;
-    nextBtn.classList.add("shadow");
-    nextBtn.classList.add("btn-animation");
-  } else {
+  if (!isNaN(ageInput.value) && (ageInput.value >= 12 && ageInput.value < 130)) {
+    if (ageInput && ageInput.value) {
+      nextBtn.disabled = false;
+      nextBtn.classList.add("shadow");
+      nextBtn.classList.add("btn-animation");
+    } else {
+      nextBtn.disabled = true;
+      nextBtn.classList.remove("btn-animation");
+    }
+  }else {
     nextBtn.disabled = true;
     nextBtn.classList.remove("btn-animation");
   }
+  
 });
 nextBtn.addEventListener("click", () => {
   age = parseInt(ageInput.value);
@@ -62,20 +68,29 @@ nextBtn.addEventListener("click", () => {
 });
 
 kmInput.addEventListener("input", () => {
-  if (kmInput && kmInput.value) {
-    calcBtn.disabled = false;
-    calcBtn.classList.add("shadow");
-    calcBtn.classList.remove("btn-light");
-    calcBtn.classList.add("btn-success");
-    calcBtn.classList.add("btn-animation");
-    calcBtn.classList.add("btn-see");
-  } else {
+  if (!isNaN(kmInput.value) && (kmInput.value > 0 && kmInput.value < 2500)) {
+    if (kmInput && kmInput.value) {
+      calcBtn.disabled = false;
+      calcBtn.classList.add("shadow");
+      calcBtn.classList.remove("btn-light");
+      calcBtn.classList.add("btn-success");
+      calcBtn.classList.add("btn-animation");
+      calcBtn.classList.add("btn-see");
+    } else {
+      calcBtn.disabled = true;
+      calcBtn.classList.add("btn-light");
+      calcBtn.classList.remove("btn-success");
+      calcBtn.classList.remove("btn-animation");
+      calcBtn.classList.remove("btn-see");
+    }
+  }else {
     calcBtn.disabled = true;
     calcBtn.classList.add("btn-light");
     calcBtn.classList.remove("btn-success");
     calcBtn.classList.remove("btn-animation");
     calcBtn.classList.remove("btn-see");
   }
+  
 });
 
 calcBtn.addEventListener("click", () => {
